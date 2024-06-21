@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useState } from 'react'
 
 export const Socket = createContext(null);
 
-const URL = 'ws://localhost:8080';
+const URL = 'ws://https://chess-vedant-server.vercel.app:8080';
 
 function SocketContext({children}) {
   const [socket, setSocket] = useState(null);
