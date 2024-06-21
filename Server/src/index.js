@@ -2,6 +2,19 @@ const express = require('express')
 const app = express();
 const WebSocket = require('ws');
 const GameMannager = require('./GameMannager');
+const Pusher = require("pusher");
+
+const pusher = new Pusher({
+  appId: "1823029",
+  key: "1337f87ef60cc1b7b0d9",
+  secret: "85c93edb01e145a2d1a9",
+  cluster: "ap2",
+  useTLS: true
+});
+
+pusher.trigger("my-channel", "my-event", {
+  message: "hello world"
+});
 
 console.log('starting');
 app.get("/", (req, res) => {
