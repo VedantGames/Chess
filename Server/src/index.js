@@ -1,10 +1,17 @@
 const express = require('express')
 const app = express();
-const server = require('http').createServer(app)
 const WebSocket = require('ws');
 const GameMannager = require('./GameMannager');
 
 console.log('starting');
+app.get("/", (req, res) => {
+  res.send('Hello, world!');
+});
+
+const port = 3000;
+console.log('listening');
+const server = app.listen(port, () => console.log(`Server running on port ${port} 🔥`));
+
 const wss = new WebSocket.Server({ server:server });
 
 console.log('game');
@@ -17,11 +24,3 @@ wss.on('connection', user => {
 
   user.on('disconnect', () => game.remUser(user));
 });
-
-app.get("/", (req, res) => {
-  res.send('Hello, world!');
-});
-
-const port = 3000;
-console.log('listening');
-app.listen(port, () => console.log(`Server running on port ${port} 🔥`));
