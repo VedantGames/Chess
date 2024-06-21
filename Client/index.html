@@ -5,21 +5,6 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + React</title>
-    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
-    <script>
-  
-      // Enable pusher logging - don't include this in production
-      Pusher.logToConsole = true;
-  
-      var pusher = new Pusher('1337f87ef60cc1b7b0d9', {
-        cluster: 'ap2'
-      });
-  
-      var channel = pusher.subscribe('my-channel');
-      channel.bind('my-event', function(data) {
-        alert(JSON.stringify(data));
-      });
-    </script>
   </head>
   <body>
     <div id="root"></div>
