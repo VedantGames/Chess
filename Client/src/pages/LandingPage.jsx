@@ -59,7 +59,7 @@ function LandingPage() {
             onChange={ev => setRating(ev.target.value)}
           />
         </div>
-        <button onClick={startGame} className='bg-[#81b64c] border-b-4 border-[#45753c] w-48 h-12 rounded-xl font-bold text-2xl'>Play</button>
+        <button onClick={startGame} className='bg-[#81b64c] border-b-4 border-[#45753c] md:w-48 w-full h-12 rounded-xl font-bold text-2xl'>Play</button>
       </div>)}
     </div>
   )
