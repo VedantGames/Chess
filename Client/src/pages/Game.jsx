@@ -28,6 +28,7 @@ function Game() {
   const move = (from, to) => {
     if (chance === color) {
       try {
+        board.move(from+to);
         socket.send(JSON.stringify({
           type: "move",
           move: from+to
