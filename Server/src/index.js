@@ -9,7 +9,7 @@ app.get("/", (req, res) => {
 });
 
 const port = 3000;
-console.log('listening');
+console.log('listenisfgdfgng');
 const server = app.listen(port, () => console.log(`Server running on port ${port} 🔥`));
 
 const wss = new WebSocket.Server({ server:server });
