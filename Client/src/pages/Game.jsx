@@ -12,6 +12,14 @@ function Game() {
   const [position, setPosition] = useState(board.fen());
   const { color } = useParams();
   const [chance, setChance] = useState('white');
+  const [screen, setScreen] = useState(window.innerWidth);
+
+  useEffect(() => {
+    window.addEventListener('resize', () => setScreen(window.innerWidth));
+    return () => {
+      window.removeEventListener('resize', () => setScreen(window.innerWidth));
+    };
+  }, []);
 
   useEffect(() => {
     socket.onmessage = event => {
@@ -29,6 +37,7 @@ function Game() {
     if (chance === color) {
       try {
         board.move(from+to);
+        setPosition(board.fen())
         socket.send(JSON.stringify({
           type: "move",
           move: from+to
@@ -43,35 +52,37 @@ function Game() {
   }
 
   return (
-    <div className='px-20 py-10'>
+    <div className='px-20 py-10 flex justify-center items-center'>
       <div>
-        <div className='flex gap-2 mb-3'>
-          <h1 className='text-2xl font-bold'>
-            {socket.playerData.name}
-          </h1>
-          <h2 className='text-lg text-[#aaa] mt-1'>
-            ({socket.playerData.rating})
-          </h2>
+        <div>
+          <div className='flex gap-2 mb-3'>
+            <h1 className='text-2xl font-bold'>
+              {socket.playerData.name}
+            </h1>
+            <h2 className='text-lg text-[#aaa] mt-1'>
+              ({socket.playerData.rating})
+            </h2>
+          </div>
         </div>
-      </div>
-      <div>
-        <Chessboard
-          id={'board'}
-          position={position}
-          onPieceDrop={move}
-          boardWidth={750}
-          customLightSquareStyle={{backgroundColor: "#ebecd0"}}
-          customDarkSquareStyle={{backgroundColor: "#739552"}}
-        />
-      </div>
-      <div>
-        <div className='flex gap-2 mb-3'>
-          <h1 className='text-2xl font-bold'>
-            {user.name}
-          </h1>
-          <h2 className='text-lg text-[#aaa] mt-1'>
-            ({user.rating})
-          </h2>
+        <div>
+          <Chessboard
+            id={'board'}
+            position={position}
+            onPieceDrop={move}
+            boardWidth={(screen > 850 ? 750 : screen - 60)}
+            customLightSquareStyle={{backgroundColor: "#ebecd0"}}
+            customDarkSquareStyle={{backgroundColor: "#739552"}}
+          />
+        </div>
+        <div>
+          <div className='flex gap-2 mb-3'>
+            <h1 className='text-2xl font-bold'>
+              {user.name}
+            </h1>
+            <h2 className='text-lg text-[#aaa] mt-1'>
+              ({user.rating})
+            </h2>
+          </div>
         </div>
       </div>
     </div>

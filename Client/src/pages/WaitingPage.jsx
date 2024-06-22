@@ -18,8 +18,8 @@ function WaitingPage() {
   }, [socket]);
   
   return (
-    <div>
-      Waiting
+    <div className='size-full flex justify-center items-center mt-20 font-bold text-4xl'>
+      Waiting...
     </div>
   )
 }

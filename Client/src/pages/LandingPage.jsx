@@ -37,8 +37,12 @@ function LandingPage() {
   }, [socket]);
 
   return (
-    <div className='px-32 mt-20'>
-      <div className='flex px-32 gap-10'>
+    <div className='md:px-32 px-0 mt-20 flex justify-center items-center'>
+      { !socket ? (
+        <div className='text-5xl font-bold'>
+          Loading
+        </div>
+      ) : (<div className='flex md:px-32 gap-10 md:flex-row flex-col'>
         <div className='flex flex-col gap-2'>
           <input
             type="text" 
@@ -56,7 +60,7 @@ function LandingPage() {
           />
         </div>
         <button onClick={startGame} className='bg-[#81b64c] border-b-4 border-[#45753c] w-48 h-12 rounded-xl font-bold text-2xl'>Play</button>
-      </div>
+      </div>)}
     </div>
   )
 }
